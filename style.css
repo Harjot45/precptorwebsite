@@ -94,3 +94,78 @@
 
 /* Keep specialty and month fields accessible in compact mobile search. */
 @media(max-width:640px){.marketplace-search>label:nth-child(3),.marketplace-search>label:nth-child(4){display:block}.marketplace-search>label:nth-child(4){grid-column:1/-1}.marketplace-search>label:nth-child(2),.marketplace-search>label:nth-child(3){grid-column:auto}}
+
+/* v6 — actual process sequence + multi-step preceptor-interest form */
+.placement-sequence{padding-top:65px;padding-bottom:65px}
+.placement-sequence-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}
+.placement-sequence-grid article{border:1px solid #dfebe5;background:#fff;border-radius:16px;padding:23px 18px 24px;position:relative;box-shadow:0 8px 22px rgba(24,64,50,.05)}
+.placement-sequence-grid article:not(:last-child)::after{content:'→';position:absolute;right:-13px;top:49%;z-index:2;color:#d36b4a;font-weight:700;background:#fafbf9;border-radius:99px;width:22px;text-align:center}
+.placement-sequence-grid article:nth-child(2),.placement-sequence-grid article:nth-child(4){background:#f2f7f4}
+.placement-sequence-grid article>span{font:800 9px/1.5 'Manrope',sans-serif;letter-spacing:.85px;color:#8a9285}
+.placement-sequence-grid .sequence-icon{width:51px;height:51px;background:#f9e3d9;color:#d16b48;display:grid;place-items:center;border-radius:12px;margin:24px 0 18px;font-size:26px}
+.placement-sequence-grid h3{font:750 16px/1.32 'Manrope',sans-serif;letter-spacing:-.35px;margin:0 0 11px;min-height:44px}
+.placement-sequence-grid p{font-size:12px;line-height:1.7;color:#6a7d75;margin:0}
+.sequence-disclaimer{margin-top:21px;padding:16px 20px;border-radius:10px;border:1px solid #eedcc7;background:#fff9ee;color:#536963;font-size:12px;line-height:1.65}
+
+.preceptor-application-section{scroll-margin-top:110px}
+.application-layout{display:grid;grid-template-columns:minmax(0,1.58fr) minmax(250px,.82fr);gap:22px;align-items:start}
+.application-main{border:1px solid #dce9e2;border-radius:20px;background:#fff;padding:clamp(21px,3vw,38px);box-shadow:0 12px 44px #173a3210;min-width:0}
+.application-header{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-bottom:25px}
+.application-eyebrow{font:800 9px 'Manrope',sans-serif;letter-spacing:1.65px;color:#b66a4e}
+.application-header h3{font:750 27px/1.3 'Manrope',sans-serif;letter-spacing:-1px;margin:7px 0}
+.application-header p{margin:0;font-size:11px;color:#6f847b}
+.application-symbol{font:normal 48px Georgia,serif;color:#e29a78}
+.application-progress-track{height:7px;border-radius:100px;background:#edf2ef;overflow:hidden}
+.application-progress-track>span{display:block;background:linear-gradient(90deg,#d66d4b,#f0ac86);height:100%;width:20%;border-radius:100px;transition:width .25s}
+.application-progress-label{display:flex;justify-content:space-between;align-items:center;margin-top:9px;color:#5c7770;font-weight:700;font-size:10px}
+.application-step-chips{display:flex;flex-wrap:wrap;gap:6px;margin:17px 0 31px}
+.application-step-chips span{font:700 9px 'Manrope',sans-serif;color:#79918b;padding:7px 9px;border:1px solid #e5eee9;border-radius:100px}
+.application-step-chips span.active{background:#153e40;color:white;border-color:#153e40}
+.application-step-chips span.completed{background:#e8f2eb;color:#327554;border-color:#cde5d5}
+.application-step[hidden]{display:none!important}
+.application-section-label{font:800 10px 'Manrope',sans-serif;letter-spacing:1px;color:#ca764e}
+.application-step h4{font:750 25px/1.25 'Manrope',sans-serif;letter-spacing:-.6px;margin:10px 0}
+.application-description{font-size:12px;color:#6e817b;line-height:1.8;margin:0 0 25px;max-width:590px}
+.application-form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:19px 15px}
+.application-field{display:flex;flex-direction:column;font:750 11px 'Manrope',sans-serif;line-height:1.5;color:#274b45;min-width:0}
+.application-field>span,.application-consent strong{color:#c35b3d}
+.application-field input,.application-field select,.application-field textarea{margin-top:7px;background:#fbfdfb;border:1px solid #d6e4dc;border-radius:9px;min-height:46px;padding:11px 13px;outline-offset:2px;color:#183b34;font:500 12px 'DM Sans',sans-serif;width:100%;box-sizing:border-box;resize:vertical}
+.application-field textarea{min-height:100px}
+.application-field input:focus,.application-field select:focus,.application-field textarea:focus{outline:2px solid #a9d5ba;border-color:#4c9d73}
+.application-field small{font-size:10px;font-weight:400;color:#7b8f88;line-height:1.55;margin-top:5px}
+.application-form-grid .span-all{grid-column:1/-1}
+.application-consent{margin-top:24px;display:flex;gap:12px;padding:17px;border-radius:11px;background:#f4f7f3;font:500 11px/1.65 'DM Sans',sans-serif;color:#516962;cursor:pointer}
+.application-consent input{width:17px;height:17px;margin:2px 0 0;flex:0 0 auto;accent-color:#245646}
+.application-honeypot{position:absolute!important;left:-9999px!important;max-height:1px;overflow:hidden}
+.application-navigation{margin-top:31px;padding-top:19px;border-top:1px solid #e7eee9;display:flex;gap:12px;align-items:center;justify-content:flex-end;flex-wrap:wrap}
+.application-navigation #application-back:not([hidden]){margin-right:auto}
+.application-navigation button[hidden]{display:none!important}
+.application-review{border:1px solid #dbe8e0;border-radius:12px;overflow:hidden;background:#fff}
+.application-review-row{display:grid;grid-template-columns:175px minmax(0,1fr);gap:15px;padding:12px 17px;border-bottom:1px solid #e8f0eb;font-size:11px;line-height:1.6}
+.application-review-row:nth-child(even){background:#f8faf8}
+.application-review-row:last-child{border-bottom:0}
+.application-review-row span{color:#6b8178}
+.application-review-row strong{font-weight:700;overflow-wrap:anywhere;color:#22443b}
+.application-connection-note{font-size:11px;line-height:1.7;padding:15px;border:1px solid #e8d8bd;background:#fff9ef;border-radius:9px;color:#726447;margin-top:17px}
+.application-submit-status:empty{display:none}
+.application-submit-status{margin-top:12px;padding:13px 15px;border-radius:8px;font-size:11px;line-height:1.6}
+.application-submit-status.good{color:#236244;background:#e9f6eb;border:1px solid #bbdfc5}
+.application-submit-status.error{color:#922e2e;background:#fff0ec;border:1px solid #e6bcad}
+.application-sidebar{background:#14363d;color:#fff;border-radius:20px;padding:34px 29px;position:sticky;top:125px;overflow:hidden}
+.application-sidebar::after{content:'✳';position:absolute;right:-34px;top:-90px;font:210px Georgia,serif;color:#ffffff09;pointer-events:none}
+.application-sidebar .application-eyebrow{color:#f1a17c}
+.application-sidebar-icon{font:46px Georgia;color:#efab89;margin:0 0 29px}
+.application-sidebar h3{font:500 33px/1.2 'Newsreader',Georgia,serif;letter-spacing:-1px;margin:15px 0 18px}
+.application-sidebar>p{color:#d2ded8;line-height:1.85;font-size:12px;margin:0}
+.application-sidebar-rule{height:1px;background:#ffffff29;margin:28px 0}
+.application-sidebar h4{font:700 14px 'Manrope',sans-serif;letter-spacing:-.25px}
+.application-sidebar ol{padding-left:19px;display:grid;gap:14px;color:#c9d9d4;font-size:12px;line-height:1.6}
+.application-sidebar li::marker{color:#eba683}
+.application-aside-note{margin-top:27px;padding:18px;border:1px solid #ffffff22;background:#ffffff08;border-radius:10px;color:#e4e9e4}
+.application-aside-note strong{font-size:11px}
+.application-aside-note p{font-size:10px;line-height:1.7;color:#c3d1cb;margin:7px 0 0}
+@media(max-width:1100px){.placement-sequence-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.placement-sequence-grid article:not(:last-child)::after{display:none}.application-layout{grid-template-columns:minmax(0,1.4fr) minmax(220px,.8fr)}}
+@media(max-width:800px){.placement-sequence-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.application-layout{grid-template-columns:1fr}.application-sidebar{position:static}}
+@media(max-width:550px){.placement-sequence-grid{grid-template-columns:1fr}.application-main{padding:22px 18px}.application-form-grid{grid-template-columns:1fr}.application-form-grid .span-all{grid-column:auto}.application-review-row{grid-template-columns:1fr;gap:2px}.application-navigation .btn{font-size:11px;padding:12px}.application-step-chips span{font-size:8px}.application-sidebar{padding:25px}}
+/* A few existing decorative layers extend outside mobile viewports. Clip visual overflow without creating a horizontal scroll. */
+html,body{overflow-x:clip}

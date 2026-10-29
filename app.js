@@ -1,4 +1,4 @@
-/* Placement Preceptor v5: five standalone pages, no maps, printing or checklist tools. */
+/* Placement Preceptor v6: five standalone pages, no maps, printing or checklist tools. */
 (() => {
 'use strict';
 const $ = (s, root = document) => root.querySelector(s);
@@ -228,21 +228,6 @@ function renderJourney(){
   const url=new URL(location.href);if(audience==='student')url.searchParams.delete('audience');else url.searchParams.set('audience',audience);
   updatePageURL(url);
 }
-// Preceptor mentoring snapshot, local to page.
-function mentorValues(){const fd=new FormData($('#mentor-preview-form'));return Object.fromEntries(fd.entries());}
-function mentorSummary(){
-  if(page!=='preceptors')return;
-  const v=mentorValues();
-  $('#mentor-summary-title').textContent=v.specialty||'Family Practice';
-  $('#mentor-summary-text').textContent=`${v.setting} · ${v.days} ${v.days==='1'?'day':'days'} / week · ${v.capacity} ${v.capacity==='1'?'student':'students'}`;
-}
-async function copyMentor(){
-  const v=mentorValues();
-  const txt=`Placement Preceptor — practice planning summary\nSpecialty: ${v.specialty}\nClinical setting: ${v.setting}\nAvailability: ${v.days} day(s) per week\nPotential student capacity: ${v.capacity}\n\nPlanning only: school eligibility, approval and actual placement are unverified.`;
-  try { await navigator.clipboard.writeText(txt);toast('Planning summary copied.'); }
-  catch {const ta=document.createElement('textarea');ta.value=txt;ta.style.position='fixed';ta.style.opacity='0';document.body.append(ta);ta.select();let ok=false;try{ok=document.execCommand('copy')}catch{}ta.remove();toast(ok?'Planning summary copied.':'Copy unavailable. Select and copy your visible summary.');}
-}
-
 // Shared click and change handlers. Buttons in modal and dynamic grids remain live.
 document.addEventListener('click', e => {
   const el=e.target.closest('[data-save],[data-detail],[data-request],[data-add-compare],[data-clear-filter],[data-reset],[data-start],[data-close],[data-resource],[data-article],[data-resource-reset],[data-resource-category],[data-faq-category],[data-audience],[data-journey-index]');
@@ -253,7 +238,7 @@ document.addEventListener('click', e => {
   else if(el.hasAttribute('data-add-compare')){toggleCompare(el.dataset.addCompare);el.textContent=compare.includes(el.dataset.addCompare)?'Remove from comparison':'Add to comparison';}
   else if(el.hasAttribute('data-clear-filter'))clearFilter(el.dataset.clearFilter);
   else if(el.hasAttribute('data-reset'))resetFilters();
-  else if(el.hasAttribute('data-start'))startWizard(el.dataset.start);
+  else if(el.hasAttribute('data-start')){if(el.dataset.start==='preceptor') location.href='for-preceptors.html#become-a-preceptor';else startWizard(el.dataset.start);}
   else if(el.hasAttribute('data-close'))closeModal();
   else if(el.hasAttribute('data-resource'))privacyResource();
   else if(el.hasAttribute('data-article')){e.preventDefault();openArticle(el.dataset.article);}
@@ -303,12 +288,6 @@ if(page==='process'){
   $('#journey-prev').addEventListener('click',()=>{journeyIndex=Math.max(0,journeyIndex-1);renderJourney();});
   $('#journey-next').addEventListener('click',()=>{journeyIndex=(journeyIndex+1)%PP.journey[audience].length;renderJourney();});
   renderJourney();
-}
-if(page==='preceptors'){
-  const f=$('#mentor-preview-form');f.addEventListener('input',mentorSummary);f.addEventListener('change',mentorSummary);
-  f.addEventListener('reset',()=>setTimeout(mentorSummary,0));
-  $('#copy-mentor-summary').addEventListener('click',copyMentor);
-  mentorSummary();
 }
 if(page==='resources'){
   $('#resource-search').addEventListener('input',renderResources);
