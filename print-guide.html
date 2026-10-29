@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#102d39">
+  <meta name="description" content="Print or save your Placement Preceptor clinical rotation guide as a PDF.">
+  <title>Print Guide | Placement Preceptor</title>
+  <link rel="stylesheet" href="print-guide.css">
+  <script src="data.js" defer></script>
+  <script src="print-guide.js" defer></script>
+</head>
+<body>
+  <header class="action-bar no-print">
+    <div class="bar-inner">
+      <a class="back-link" id="return-to-guide" href="resources.html">← Back to resources</a>
+      <div class="bar-action">
+        <span class="bar-hint">PDF: choose “Save as PDF” in the print window</span>
+        <button type="button" id="print-button" class="print-button">Print / Save as PDF ↗</button>
+      </div>
+    </div>
+  </header>
+  <main id="print-main">
+    <section class="print-explainer no-print" aria-label="How to save your guide">
+      <div><strong>Ready to print</strong><p>Review the guide below. Select <b>Print / Save as PDF</b>, then choose your printer or <b>Save as PDF</b> in the browser dialog.</p></div>
+      <button type="button" id="print-mobile" class="print-button">Print / Save as PDF ↗</button>
+    </section>
+    <article class="paper" id="print-article" aria-live="polite">
+      <p class="loading">Preparing your guide…</p>
+    </article>
+  </main>
+</body>
+</html>

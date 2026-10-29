@@ -1,0 +1,15 @@
+const {test}=require('node:test');
+const assert=require('node:assert/strict');
+const vm=require('node:vm');
+const fs=require('node:fs');
+const path=require('node:path');
+const c={window:{}};c.window=c;vm.createContext(c);vm.runInContext(fs.readFileSync(path.join(__dirname,'../data.js'),'utf8'),c);
+const {rotations,filterRotations,guides,journey}=c.PP;
+test('combines specialty, state, month and setting',()=>{const rows=filterRotations(rotations,{specialty:'Family Practice',location:' georgia ',month:'2027-01',setting:'Outpatient clinic'});assert.equal(rows.length,1);assert.equal(rows[0].id,'demo-01')});
+test('state name search is case-insensitive',()=>assert.equal(filterRotations(rotations,{location:'TEXAS'}).length,3));
+test('no fictional availability fabricated for empty searches',()=>assert.equal(filterRotations(rotations,{location:'Alaska'}).length,0));
+test('saved shortlist respects ids',()=>assert.equal(filterRotations(rotations,{savedOnly:true,saved:['demo-03']}).length,1));
+test('sorting leaves original source order unchanged',()=>{const before=rotations.map(r=>r.id).join();const rows=filterRotations(rotations,{sort:'hours'});assert.equal(rows[0].hours,200);assert.equal(rows.at(-1).hours,120);assert.equal(rotations.map(r=>r.id).join(),before)});
+test('journeys include five independent steps for each audience',()=>{for(const key of ['student','preceptor','school'])assert.equal(journey[key].length,5)});
+test('guides include actionable content and unique link ids',()=>{assert.ok(guides.length>=8);assert.equal(guides.length,new Set(guides.map(g=>g.id)).size);for(const guide of guides){assert.ok(guide.sections.length>=3);assert.ok(guide.summary.length>15)}});
+test('all five route files use the correct page entry and local asset paths',()=>{for(const [file,id] of [['index.html','home'],['explore.html','explore'],['how-it-works.html','process'],['for-preceptors.html','preceptors'],['resources.html','resources']]){const html=fs.readFileSync(path.join(__dirname,'..',file),'utf8');assert.match(html,new RegExp(`data-page="${id}"`));assert.match(html,/src="app.js"/);assert.match(html,/href="style.css"/);assert.match(html,/id="site-nav"/)}});

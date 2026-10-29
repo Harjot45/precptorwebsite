@@ -1,0 +1,8 @@
+const {test}=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path');
+const root=path.resolve(__dirname,'..'),read=n=>fs.readFileSync(path.join(root,n),'utf8');
+const pages=['index','explore','how-it-works','for-preceptors','resources'];
+test('all five pages include visible Find a Match action',()=>{for(const page of pages){const html=read(page+'.html');assert.match(html,/header-find-match[^>]+data-start="student"/);assert.match(html,/Find a Match/);}});
+test('no map, checkbox or printing interface',()=>{for(const page of pages){const html=read(page+'.html');assert.doesNotMatch(html,/(<input[^>]*type="checkbox"|print-guide|rotation-map|map-pane|leaflet|explorer-map\.js)/i,page);}assert.equal(fs.existsSync(path.join(root,'explorer-map.js')),false);assert.equal(fs.existsSync(path.join(root,'print-guide.html')),false);assert.doesNotMatch(read('app.js'),/data-readiness|data-guide-check|window\.print|data-focus-map/);});
+test('standalone directory and filter IDs are present',()=>{const html=read('explore.html');for(const id of ['rotation-grid','results-count','filter-location','filter-specialty','filter-code','filter-month','saved-only','directory-filter-toggle','sort','view-grid','view-list','reset-filters'])assert.match(html,new RegExp('id="'+id+'"'));});
+test('resources remain searchable and have article details without checkbox and print controls',()=>{const app=read('app.js');assert.match(app,/function openArticle/);assert.match(app,/function renderResources/);assert.doesNotMatch(app,/Print \/ Save as PDF|article-checklist/);});
+test('all pages include the rule-based chat',()=>{for(const page of pages)assert.match(read(page+'.html'),/src="chat\.js"/);});
